@@ -3,6 +3,15 @@ use pdf_canvas::graphicsstate::Color;
 use pdf_canvas::{BuiltinFont, FontSource, Pdf};
 use rand::prelude::*;
 
+fn blanck_splace(to_serch:&String) -> usize{
+    let mut base=70;
+    let v:Vec<&str> = to_serch.split("").collect();
+    while v[base] !=" " {
+        base-=1;
+    }
+    base
+}
+
 fn create_qcm(num: i32, mut content: Vec<String>) {
     for n in 1..=num {
         let file_name = format!("../qcm_folder/qcm{}.pdf", n);
@@ -18,7 +27,8 @@ fn create_qcm(num: i32, mut content: Vec<String>) {
                     // Some text
                     if let Some(mut hello) = content.pop() {
                         if hello.len() >= 70 {
-                            let reste = hello.split_off(70);
+                            let reste = hello.split_off(blanck_splace(&hello));
+                            
                             canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &hello)
                                 .expect("this is gonna work");
