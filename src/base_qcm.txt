@@ -1,8 +1,11 @@
 c'est quoi git?
+A:bonne question B:pack manager C:why are you asking D:google help me
 
 Vous avez fini de corriger?
+A:peut etre B:tu vas faire quoi? C:Ah shit here we go again
 
-Pourquoi scheme est le pire language? 
+scheme est le pire language? 
+A:Oui B:OUI C:OUIIII!
 
 le démerdentiel c'est simple?
 
