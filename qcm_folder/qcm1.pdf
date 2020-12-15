@@ -7,37 +7,47 @@ stream
 BT
 /F0 6 Tf
 10 280 Td
-(Vous avez fini de corriger? ) Tj
+(NAME:) Tj
 ET
 BT
 /F0 6 Tf
 10 270 Td
-(1\)peut etre   2\):  3\)Ah shit here we go again  4\)tu vas faire quoi?  ) Tj
+(DATE:) Tj
 ET
 BT
 /F0 6 Tf
-10 245 Td
-(c'est quoi git? ) Tj
-ET
-BT
-/F0 6 Tf
-10 235 Td
-(1\)why are you asking  2\)pack manager   3\):  4\)bonne question  ) Tj
-ET
-BT
-/F0 6 Tf
-10 210 Td
+10 250 Td
 (scheme est le pire language?  ) Tj
 ET
 BT
 /F0 6 Tf
-10 200 Td
-(1\):  2\)OUIIII!  3\)OUI   4\)Oui  ) Tj
+10 240 Td
+(1\)OUIIII!  2\):  3\)Oui   4\)OUI  ) Tj
+ET
+BT
+/F0 6 Tf
+10 215 Td
+(Vous avez fini de corriger? ) Tj
+ET
+BT
+/F0 6 Tf
+10 205 Td
+(1\)Ah shit here we go again  2\)tu vas faire quoi?   3\)peut etre   4\): ) Tj
+ET
+BT
+/F0 6 Tf
+10 180 Td
+(c'est quoi git? ) Tj
+ET
+BT
+/F0 6 Tf
+10 170 Td
+(1\)pack manager   2\)bonne question   3\):  4\)why are you asking ) Tj
 ET
 endstream
 endobj
 4 0 obj
-462
+534
 endobj
 5 0 obj
 << /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>
@@ -64,16 +74,16 @@ endobj
 xref
 0 7
 0000000000 65535 f 
-0000000852 00000 n 
-0000000787 00000 n 
+0000000924 00000 n 
+0000000859 00000 n 
 0000000015 00000 n 
-0000000529 00000 n 
-0000000548 00000 n 
-0000000647 00000 n 
+0000000601 00000 n 
+0000000620 00000 n 
+0000000719 00000 n 
 trailer
 << /Size 7
    /Root 1 0 R
 >>
 startxref
-904
+976
 %%EOF

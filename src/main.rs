@@ -23,7 +23,7 @@ fn randomize_answers(answers: &str) -> String {
         nb_quest += 1;
         println!("hum");
     }*/
-    for i in 0..sanswers.len(){
+    for i in 0..sanswers.len() {
         returned_string.push(format!("{}){} ", nb_quest, sanswers[i]));
         nb_quest += 1;
     }
@@ -41,7 +41,14 @@ fn create_qcm(num: i32, mut content: Vec<String>) {
             let mut height_to_right = 280.0;
             document
                 .render_page(210.0, 297.0, |canvas| {
-                    
+                    canvas
+                        .left_text(10.0, height_to_right, font, 6.0, "NAME:")
+                        .expect("this is gonna work");
+                    height_to_right -= 10.0;
+                    canvas
+                        .left_text(10.0, height_to_right, font, 6.0, "DATE:")
+                        .expect("this is gonna work");
+                    height_to_right -= 20.0;
                     while !content.is_empty() && height_to_right > 40.0 {
                         if let Some(mut hello) = content.pop() {
                             let questy: Vec<&str> = hello.split("answers").collect();
