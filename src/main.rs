@@ -30,79 +30,82 @@ fn randomize_answers(answers: &str) -> String {
     }
     returned_string.join(" ")
 }
-fn create_qcm(num: i32, mut content: Vec<String>) {
-    for n in 1..=num {
-        let file_name = format!("../qcm_folder/qcm{}.pdf", n);
 
-        let mut document = Pdf::create(&file_name).expect("Create pdf file");
+///CONTENT NOT REFRESHED SO IT DOESNT CREATE OTHER CONTENT IN OTHER
+fn create_qcm(num: i32, content: &mut Vec<String>) {
+    //for n in 1..=num {
+    let file_name = format!("../qcm_folder/qcm{}.pdf", num);
 
-        let font = BuiltinFont::Times_Roman;
+    let mut document = Pdf::create(&file_name).expect("Create pdf file");
 
-        while !content.is_empty() {
-            let mut height_to_right = 280.0;
-            document
-                .render_page(210.0, 297.0, |canvas| {
-                    canvas
-                        .left_text(10.0, height_to_right, font, 6.0, "NAME:")
-                        .expect("this is gonna work");
-                    height_to_right -= 10.0;
-                    canvas
-                        .left_text(10.0, height_to_right, font, 6.0, "DATE:")
-                        .expect("this is gonna work");
-                    height_to_right -= 20.0;
-                    while !content.is_empty() && height_to_right > 40.0 {
-                        if let Some(hello) = content.pop() {
-                            let questy: Vec<&str> = hello.split("answers:").collect();
-                            let answer_shuf = randomize_answers(questy[1]);
-                            if questy[0].len() >= 70 {
-                                //need to split_inclusive the qiestion from the answers
+    let font = BuiltinFont::Times_Roman;
 
-                                let reste = questy[0]
-                                    .to_string()
-                                    .split_off(blank_splace(&questy[0].to_string()));
+    while !content.is_empty() {
+        let mut height_to_right = 280.0;
+        document
+            .render_page(210.0, 297.0, |canvas| {
+                canvas
+                    .left_text(10.0, height_to_right, font, 6.0, "NAME:")
+                    .expect("this is gonna work");
+                height_to_right -= 10.0;
+                canvas
+                    .left_text(10.0, height_to_right, font, 6.0, "DATE:")
+                    .expect("this is gonna work");
+                height_to_right -= 20.0;
+                while !content.is_empty() && height_to_right > 40.0 {
+                    if let Some(hello) = content.pop() {
+                        let questy: Vec<&str> = hello.split("answers:").collect();
+                        let answer_shuf = randomize_answers(questy[1]);
+                        if questy[0].len() >= 70 {
+                            //need to split_inclusive the qiestion from the answers
 
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &questy[0])
-                                    .expect("this is gonna work");
-                                height_to_right -= 5.0;
+                            let reste = questy[0]
+                                .to_string()
+                                .split_off(blank_splace(&questy[0].to_string()));
 
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &reste)
-                                    .expect("maybe gonna work");
+                            canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &questy[0])
+                                .expect("this is gonna work");
+                            height_to_right -= 5.0;
 
-                                height_to_right -= 10.0;
+                            canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &reste)
+                                .expect("maybe gonna work");
 
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
-                                    .expect("maybe gonna work");
-                                height_to_right -= 15.0;
-                            } else {
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &questy[0])
-                                    .expect("please work");
+                            height_to_right -= 10.0;
 
-                                height_to_right -= 10.0;
+                            canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
+                                .expect("maybe gonna work");
+                            height_to_right -= 15.0;
+                        } else {
+                            canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &questy[0])
+                                .expect("please work");
 
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
-                                    .expect("maybe gonna work");
-                                height_to_right -= 15.0;
-                            }
+                            height_to_right -= 10.0;
+
+                            canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
+                                .expect("maybe gonna work");
+                            height_to_right -= 15.0;
                         }
-                        height_to_right -= 10.0;
                     }
-                    Ok(())
-                })
-                .expect("Write page");
-        }
-        document.finish().expect("Finish pdf document");
+                    height_to_right -= 10.0;
+                }
+                Ok(())
+            })
+            .expect("Write page");
     }
+    document.finish().expect("Finish pdf document");
+    //}
 }
 fn main() -> anyhow::Result<()> {
     let buffer = std::fs::read_to_string("qcm_answer.txt")?;
     let mut lines = buffer.lines();
     let mut rng = rand::thread_rng();
     let mut vec_quest: Vec<String> = Vec::new();
+    let mut vec_vec: Vec<Vec<String>> = Vec::new();
     let how_much = 5;
 
     while let (Some(mut question), Some(mut reponse)) = (lines.next(), lines.next()) {
@@ -115,11 +118,15 @@ fn main() -> anyhow::Result<()> {
         let res = format!("{} {}", question, reponse);
         vec_quest.push(res.to_string());
     }
+    for i in 1..=how_much {
+        vec_quest.shuffle(&mut rng);
+        let to_push_vec = vec_quest.clone();
+        vec_vec.push(to_push_vec);
+        //  println!("{:?}",vec_quest);
+    }
 
-    vec_quest.shuffle(&mut rng);
-    //  println!("{:?}",vec_quest);
-
-    create_qcm(how_much, vec_quest);
-
+    for n in 1..=how_much {
+        create_qcm(n, &mut vec_vec[(n-1) as usize]);
+    }
     anyhow::Result::Ok(())
 }

@@ -1,9 +1,69 @@
 %PDF-1.7
 %µí®û
+3 0 obj
+<< /Length 4 0 R >>
+stream
+/DeviceRGB cs /DeviceRGB CS
+BT
+/F0 6 Tf
+10 280 Td
+(NAME:) Tj
+ET
+BT
+/F0 6 Tf
+10 270 Td
+(DATE:) Tj
+ET
+BT
+/F0 6 Tf
+10 250 Td
+(Vous avez fini de corriger? ) Tj
+ET
+BT
+/F0 6 Tf
+10 240 Td
+(1\)peut etre   2\)Ah shit here we go again  3\)   4\)tu vas faire quoi?  ) Tj
+ET
+BT
+/F0 6 Tf
+10 215 Td
+(scheme est le pire language?  ) Tj
+ET
+BT
+/F0 6 Tf
+10 205 Td
+(1\)Oui   2\)OUI   3\)   4\)OUIIII! ) Tj
+ET
+BT
+/F0 6 Tf
+10 180 Td
+(c'est quoi git? ) Tj
+ET
+BT
+/F0 6 Tf
+10 170 Td
+(1\)why are you asking  2\)   3\)pack manager   4\)bonne question  ) Tj
+ET
+endstream
+endobj
+4 0 obj
+534
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Page
+   /Parent 2 0 R
+   /Resources << /Font << /F0 5 0 R >> >>
+   /MediaBox [ 0 0 210 297 ]
+   /Contents 3 0 R
+>>
+endobj
 2 0 obj
 << /Type /Pages
-   /Count 0
-   /Kids [ ]
+   /Count 1
+   /Kids [ 6 0 R ]
 >>
 endobj
 1 0 obj
@@ -12,14 +72,18 @@ endobj
 >>
 endobj
 xref
-0 3
+0 7
 0000000000 65535 f 
-0000000074 00000 n 
+0000000924 00000 n 
+0000000859 00000 n 
 0000000015 00000 n 
+0000000601 00000 n 
+0000000620 00000 n 
+0000000719 00000 n 
 trailer
-<< /Size 3
+<< /Size 7
    /Root 1 0 R
 >>
 startxref
-126
+976
 %%EOF
