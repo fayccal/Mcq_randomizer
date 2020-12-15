@@ -1,8 +1,8 @@
 c'est quoi git?
-answers:-bonne question -pack manager -why are you asking
+answers: -bonne question -pack manager -why are you asking
 
 Vous avez fini de corriger?
-answers:-peut etre -tu vas faire quoi? -Ah shit here we go again
+answers: -peut etre -tu vas faire quoi? -Ah shit here we go again
 
 scheme est le pire language? 
-answers:-Oui -OUI -OUIIII!
+answers: -Oui -OUI -OUIIII!

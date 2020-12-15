@@ -50,7 +50,7 @@ fn create_qcm(num: i32, mut content: Vec<String>) {
                         .expect("this is gonna work");
                     height_to_right -= 20.0;
                     while !content.is_empty() && height_to_right > 40.0 {
-                        if let Some(mut hello) = content.pop() {
+                        if let Some(hello) = content.pop() {
                             let questy: Vec<&str> = hello.split("answers").collect();
                             let answer_shuf = randomize_answers(questy[1]);
                             if questy[0].len() >= 70 {
