@@ -5,8 +5,8 @@ program which create multiple randomized mcq from one.
 
 # Used libs
 - rand
--anyhow
--pdf_canvas
+- anyhow
+- pdf_canvas
 # Objective
 
 - randomize and create as much file as you want from one.
