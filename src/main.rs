@@ -23,6 +23,8 @@ fn randomize_answers(answers: &str) -> String {
         nb_quest += 1;
         println!("hum");
     }*/
+    //println!("{:?}",sanswers);
+    sanswers.retain(|&x| x != ": ");
     for i in 0..sanswers.len() {
         returned_string.push(format!("{}){} ", nb_quest, sanswers[i]));
         nb_quest += 1;
