@@ -23,8 +23,7 @@ fn randomize_answers(answers: &str) -> String {
         nb_quest += 1;
         println!("hum");
     }*/
-    //println!("{:?}",sanswers);
-    sanswers.retain(|&x| x != ": ");
+
     for i in 0..sanswers.len() {
         returned_string.push(format!("{}){} ", nb_quest, sanswers[i]));
         nb_quest += 1;
@@ -53,7 +52,7 @@ fn create_qcm(num: i32, mut content: Vec<String>) {
                     height_to_right -= 20.0;
                     while !content.is_empty() && height_to_right > 40.0 {
                         if let Some(hello) = content.pop() {
-                            let questy: Vec<&str> = hello.split("answers").collect();
+                            let questy: Vec<&str> = hello.split("answers:").collect();
                             let answer_shuf = randomize_answers(questy[1]);
                             if questy[0].len() >= 70 {
                                 //need to split_inclusive the qiestion from the answers
