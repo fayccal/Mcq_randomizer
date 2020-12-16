@@ -17,12 +17,9 @@ fn randomize_answers(answers: &str) -> String {
     sanswers.shuffle(&mut rng);
     let mut returned_string: Vec<String> = Vec::new();
     let mut nb_quest = 1;
-    //boucle infinie
-    /*while let Some(join_mode) = sanswers.iter().next() {
-        returned_string.push(format!("{}){}", nb_quest, join_mode));
-        nb_quest += 1;
-        println!("hum");
-    }*/
+
+    //println!("{:?}",sanswers);
+    sanswers.retain(|&x| x != " ");
 
     for i in 0..sanswers.len() {
         returned_string.push(format!("{}){} ", nb_quest, sanswers[i]));
@@ -33,7 +30,7 @@ fn randomize_answers(answers: &str) -> String {
 
 ///CONTENT NOT REFRESHED SO IT DOESNT CREATE OTHER CONTENT IN OTHER
 fn create_qcm(num: i32, content: &mut Vec<String>) {
-    //for n in 1..=num {
+
     let file_name = format!("../qcm_folder/qcm{}.pdf", num);
 
     let mut document = Pdf::create(&file_name).expect("Create pdf file");
@@ -98,7 +95,7 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
             .expect("Write page");
     }
     document.finish().expect("Finish pdf document");
-    //}
+
 }
 fn main() -> anyhow::Result<()> {
     let buffer = std::fs::read_to_string("qcm_answer.txt")?;
@@ -126,7 +123,7 @@ fn main() -> anyhow::Result<()> {
     }
 
     for n in 1..=how_much {
-        create_qcm(n, &mut vec_vec[(n-1) as usize]);
+        create_qcm(n, &mut vec_vec[(n - 1) as usize]);
     }
     anyhow::Result::Ok(())
 }
