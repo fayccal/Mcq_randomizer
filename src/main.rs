@@ -3,11 +3,20 @@ use pdf_canvas::graphicsstate::Color;
 use pdf_canvas::{BuiltinFont, FontSource, Pdf};
 use rand::prelude::*;
 
-fn blank_splace(to_serch: &String) -> usize {
-    let mut base = 70;
+/*fn blank_splace(mut base: usize, to_serch: &String) -> usize {
+    //let mut base = 70;
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
         base -= 1;
+    }
+    base
+}
+*/
+fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
+    //let mut base = 70;
+    let v: Vec<&str> = to_serch.split("").collect();
+    while v[base] != " " {
+        base += 1;
     }
     base
 }
@@ -28,9 +37,7 @@ fn randomize_answers(answers: &str) -> String {
     returned_string.join(" ")
 }
 
-///CONTENT NOT REFRESHED SO IT DOESNT CREATE OTHER CONTENT IN OTHER
 fn create_qcm(num: i32, content: &mut Vec<String>) {
-
     let file_name = format!("../qcm_folder/qcm{}.pdf", num);
 
     let mut document = Pdf::create(&file_name).expect("Create pdf file");
@@ -49,26 +56,38 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                     .left_text(10.0, height_to_right, font, 6.0, "DATE:")
                     .expect("this is gonna work");
                 height_to_right -= 20.0;
-                while !content.is_empty() && height_to_right > 40.0 {
+                while !content.is_empty() && height_to_right > 30.0 {
                     if let Some(hello) = content.pop() {
                         let questy: Vec<&str> = hello.split("answers:").collect();
                         let answer_shuf = randomize_answers(questy[1]);
-                        if questy[0].len() >= 70 {
-                            //need to split_inclusive the qiestion from the answers
 
-                            let reste = questy[0]
-                                .to_string()
-                                .split_off(blank_splace(&questy[0].to_string()));
+                        if questy[0].len() > 70 {
+                            // let mut vec_part_questy:Vec<String>=Vec::new();
+                            let mut the_good_vec: Vec<String> = Vec::new();
+                            let mut clone_questy = questy[0].to_string().clone();
+                            while clone_questy.len() > 70 {
+                                the_good_vec.push(clone_questy.split_off(blank_splace_plus(
+                                    clone_questy.len() - 70,
+                                    &clone_questy,
+                                )));
+                            }
 
                             canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &questy[0])
+                                .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
 
-                            canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &reste)
-                                .expect("maybe gonna work");
-
+                            /*canvas
+                            .left_text(10.0, height_to_right, font, 6.0, &reste)
+                            .expect("maybe gonna work");
+                            */
+                            while let Some(muda) = the_good_vec.pop() {
+                                println!("{}", muda);
+                                canvas
+                                    .left_text(10.0, height_to_right, font, 6.0, &muda)
+                                    .expect("I need coffee");
+                                height_to_right -= 5.0;
+                            }
                             height_to_right -= 10.0;
 
                             canvas
@@ -95,7 +114,6 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
             .expect("Write page");
     }
     document.finish().expect("Finish pdf document");
-
 }
 fn main() -> anyhow::Result<()> {
     let buffer = std::fs::read_to_string("qcm_answer.txt")?;
@@ -119,7 +137,7 @@ fn main() -> anyhow::Result<()> {
         vec_quest.shuffle(&mut rng);
         let to_push_vec = vec_quest.clone();
         vec_vec.push(to_push_vec);
-        //  println!("{:?}",vec_quest);
+        //println!("{:?}",vec_quest);
     }
 
     for n in 1..=how_much {
