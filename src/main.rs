@@ -24,7 +24,7 @@ fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
 }
 
 ///randomize les réponse à une question
-fn randomize_answers(answers: &str) -> String {
+fn randomize_answers(answers: &str) -> Vec<String> {
     let mut rng = rand::thread_rng();
     let mut sanswers: Vec<&str> = answers.split("-").collect();
     sanswers.shuffle(&mut rng);
@@ -38,7 +38,8 @@ fn randomize_answers(answers: &str) -> String {
         returned_string.push(format!("{}){} ", nb_quest, sanswers[i]));
         nb_quest += 1;
     }
-    returned_string.join(" ")
+    //returned_string.join(" ")
+    returned_string
 }
 
 ///fonction de création du qcm
@@ -110,10 +111,18 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                             }
                             height_to_right -= 10.0;
 
-                            canvas
+                            /*canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
                                 .expect("maybe gonna work");
-                            height_to_right -= 15.0;
+                            height_to_right -= 15.0;*/
+
+                            for j in answer_shuf{
+                                canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &j)
+                                .expect("maybe gonna work");
+                                height_to_right -= 5.0;
+                            }
+                            height_to_right -= 10.0;
                         } else {
                             canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &questy[0])
@@ -121,10 +130,17 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
 
                             height_to_right -= 10.0;
 
-                            canvas
+                            /*canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
                                 .expect("maybe gonna work");
-                            height_to_right -= 15.0;
+                            height_to_right -= 15.0;*/
+                            for j in answer_shuf{
+                                canvas
+                                .left_text(10.0, height_to_right, font, 6.0, &j)
+                                .expect("maybe gonna work");
+                                height_to_right -= 5.0;
+                            }
+                            height_to_right -= 10.0;
                         }
                     }
                     height_to_right -= 10.0;
