@@ -14,7 +14,7 @@ use rand::prelude::*;
 }
 */
 
-///fonction pour split sur un espace blanc au retour à la ligne 
+///fonction pour split sur un espace blanc au retour à la ligne
 fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
@@ -77,20 +77,21 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                                     &clone_questy,
                                 )));
                             }
-                          /*  let test:Vec<&str>=questy[0].clone().split_whitespace().collect();
-                            while !test.is_empty() {
-                            while test[0].len()+test[1].len() < 70 {
-                                [test[0], test[1]].join(" ");
-                            }
-                            the_good_vec.push(test[0].to_string());
-                        }*/
-                        
-                            //split tout et créée des phrase 
+                            the_good_vec.reverse();
+                            /*  let test:Vec<&str>=questy[0].clone().split_whitespace().collect();
+                                while !test.is_empty() {
+                                while test[0].len()+test[1].len() < 70 {
+                                    [test[0], test[1]].join(" ");
+                                }
+                                the_good_vec.push(test[0].to_string());
+                            }*/
+
+                            //split tout et créée des phrase
                             canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
-                            
+
                             /*canvas
                             .left_text(10.0, height_to_right, font, 6.0, &reste)
                             .expect("maybe gonna work");
@@ -103,7 +104,7 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 height_to_right -= 5.0;
                             }*/
 
-                            for i in the_good_vec{
+                            for i in the_good_vec {
                                 canvas
                                     .left_text(10.0, height_to_right, font, 6.0, &i)
                                     .expect("I need coffee");
@@ -116,10 +117,10 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 .expect("maybe gonna work");
                             height_to_right -= 15.0;*/
 
-                            for j in answer_shuf{
+                            for j in answer_shuf {
                                 canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &j)
-                                .expect("maybe gonna work");
+                                    .left_text(10.0, height_to_right, font, 6.0, &j)
+                                    .expect("maybe gonna work");
                                 height_to_right -= 5.0;
                             }
                             height_to_right -= 10.0;
@@ -134,10 +135,10 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
                                 .expect("maybe gonna work");
                             height_to_right -= 15.0;*/
-                            for j in answer_shuf{
+                            for j in answer_shuf {
                                 canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &j)
-                                .expect("maybe gonna work");
+                                    .left_text(10.0, height_to_right, font, 6.0, &j)
+                                    .expect("maybe gonna work");
                                 height_to_right -= 5.0;
                             }
                             height_to_right -= 10.0;
