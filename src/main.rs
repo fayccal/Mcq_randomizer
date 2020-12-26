@@ -3,6 +3,7 @@ use pdf_canvas::graphicsstate::Color;
 use pdf_canvas::{BuiltinFont, FontSource, Pdf};
 use rand::prelude::*;
 
+///fonction pour split sur un espace blanc au retour à la ligne (utilisation suspendu)
 /*fn blank_splace(mut base: usize, to_serch: &String) -> usize {
     //let mut base = 70;
     let v: Vec<&str> = to_serch.split("").collect();
@@ -12,14 +13,17 @@ use rand::prelude::*;
     base
 }
 */
+
+///fonction pour split sur un espace blanc au retour à la ligne 
 fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
-    //let mut base = 70;
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
         base += 1;
     }
     base
 }
+
+///randomize les réponse à une question
 fn randomize_answers(answers: &str) -> String {
     let mut rng = rand::thread_rng();
     let mut sanswers: Vec<&str> = answers.split("-").collect();
@@ -37,6 +41,7 @@ fn randomize_answers(answers: &str) -> String {
     returned_string.join(" ")
 }
 
+///fonction de création du qcm
 fn create_qcm(num: i32, content: &mut Vec<String>) {
     let file_name = format!("../qcm_folder/qcm{}.pdf", num);
 
@@ -71,20 +76,35 @@ fn create_qcm(num: i32, content: &mut Vec<String>) {
                                     &clone_questy,
                                 )));
                             }
-
+                          /*  let test:Vec<&str>=questy[0].clone().split_whitespace().collect();
+                            while !test.is_empty() {
+                            while test[0].len()+test[1].len() < 70 {
+                                [test[0], test[1]].join(" ");
+                            }
+                            the_good_vec.push(test[0].to_string());
+                        }*/
+                        
+                            //split tout et créée des phrase 
                             canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
-
+                            
                             /*canvas
                             .left_text(10.0, height_to_right, font, 6.0, &reste)
                             .expect("maybe gonna work");
                             */
-                            while let Some(muda) = the_good_vec.pop() {
+                            /*while let Some(muda) = the_good_vec.pop() {
                                 println!("{}", muda);
                                 canvas
                                     .left_text(10.0, height_to_right, font, 6.0, &muda)
+                                    .expect("I need coffee");
+                                height_to_right -= 5.0;
+                            }*/
+
+                            for i in the_good_vec{
+                                canvas
+                                    .left_text(10.0, height_to_right, font, 6.0, &i)
                                     .expect("I need coffee");
                                 height_to_right -= 5.0;
                             }
