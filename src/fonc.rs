@@ -137,16 +137,3 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
     }
     document.finish().expect("Finish pdf document");
 }
-
-/*
-
-while truc < question.len() {
-    truc += 70;
-    nb_line+=1;
-}
-for i in 0..nb_line {
-reste = question.split_at(endroit)
-swap(reste,question)
-push(rest)
-}
-*/
