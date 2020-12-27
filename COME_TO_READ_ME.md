@@ -4,6 +4,9 @@
 
 le but du projet était de générer a partir de 1 fichier texte de question et réponse des qcm randomizer, dont le nom du projet.
 
+# Previous project
+
+Il y a eu des tentative de projet différent précédement flappy bird qui m'interessé plus et paint qui ma donné un mal de crane a cause de la crate, j'ai donc décider de ce projet comme réel projet les autre ne sont pas compté.(pas les perme de delete).
 # How it works 
 
 le programme va générer un nombre voulu de qcm tous randomizer que ce soit au niveau des réponses et des questions.
