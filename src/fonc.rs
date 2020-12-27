@@ -1,25 +1,30 @@
 use pdf_canvas::{BuiltinFont, Pdf};
 use rand::prelude::*;
+use std::mem::swap;
 
 ///fonction pour split sur un espace blanc au retour à la ligne (utilisation suspendu)
-/*fn blank_splace(mut base: usize, to_serch: &String) -> usize {
+fn blank_splace(mut base: usize, to_serch: &String) -> usize {
     //let mut base = 70;
+    if base > to_serch.len() {
+        base = to_serch.len();
+    }
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
         base -= 1;
     }
     base
 }
-*/
+
 
 ///fonction pour split sur un espace blanc au retour à la ligne
-pub fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
+/*pub fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
         base += 1;
     }
     base
 }
+*/
 
 ///randomize les réponse à une question
 pub fn randomize_answers(answers: &str) -> Vec<String> {
@@ -67,27 +72,32 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                             // let mut vec_part_questy:Vec<String>=Vec::new();
                             let mut the_good_vec: Vec<String> = Vec::new();
                             let mut clone_questy = questy[0].to_string().clone();
-                            while clone_questy.len() > 70 {
+                            let mut cara_count = 0;
+                            let mut nb_line = 0;
+                            while cara_count <= clone_questy.len() {
+                                cara_count+=70;
+                                nb_line+=1;
+                            }
+
+                            for _i in 0..nb_line {
+                                let mut reste = clone_questy.split_off(blank_splace(70, &clone_questy));
+                                swap(&mut clone_questy, &mut reste);
+                                the_good_vec.push(reste);
+                            }
+                            /*while clone_questy.len() > 70 {
                                 the_good_vec.push(clone_questy.split_off(blank_splace_plus(
                                     clone_questy.len() - 70,
                                     &clone_questy,
                                 )));
                             }
-                            the_good_vec.reverse();
-                            /*  let test:Vec<&str>=questy[0].clone().split_whitespace().collect();
-                                while !test.is_empty() {
-                                while test[0].len()+test[1].len() < 70 {
-                                    [test[0], test[1]].join(" ");
-                                }
-                                the_good_vec.push(test[0].to_string());
-                            }*/
+                            the_good_vec.reverse();*/
 
-                            //split tout et créée des phrase
-                            canvas
+
+                            /*canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
-
+                            */
                             /*canvas
                             .left_text(10.0, height_to_right, font, 6.0, &reste)
                             .expect("maybe gonna work");
@@ -148,3 +158,16 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
     }
     document.finish().expect("Finish pdf document");
 }
+
+/*
+
+while truc < question.len() {
+    truc += 70;
+    nb_line+=1;
+}
+for i in 0..nb_line {
+reste = question.split_at(endroit)
+swap(reste,question)
+push(rest)
+}
+*/
