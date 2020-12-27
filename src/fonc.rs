@@ -8,6 +8,7 @@ fn blank_splace(mut base: usize, to_serch: &String) -> usize {
     if base > to_serch.len() {
         base = to_serch.len();
     }
+    // cherche un espace blanc pour ne pas couper de mot
     let v: Vec<&str> = to_serch.split("").collect();
     while v[base] != " " {
         base -= 1;
@@ -50,6 +51,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
 
     let font = BuiltinFont::Times_Roman;
 
+    // temps que on a encore du contenu on boucle
     while !content.is_empty() {
         let mut height_to_right = 280.0;
         document
@@ -62,6 +64,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                     .left_text(10.0, height_to_right, font, 6.0, "DATE:")
                     .expect("this is gonna work");
                 height_to_right -= 20.0;
+                // si on va pas trop en bas de la page et que on a encore du contenu
                 while !content.is_empty() && height_to_right > 30.0 {
                     if let Some(hello) = content.pop() {
                         let questy: Vec<&str> = hello.split("answers:").collect();
@@ -77,7 +80,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 cara_count += 70;
                                 nb_line += 1;
                             }
-
+                            //combien de ligne on aura a écrire
                             for _i in 0..nb_line {
                                 let mut reste =
                                     clone_questy.split_off(blank_splace(70, &clone_questy));
@@ -97,7 +100,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
                             */
-
+                            // on écrit la question
                             for i in the_good_vec {
                                 canvas
                                     .left_text(10.0, height_to_right, font, 6.0, &i)
@@ -105,7 +108,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 height_to_right -= 5.0;
                             }
                             height_to_right -= 10.0;
-
+                            //on écrit les réponses
                             for j in answer_shuf {
                                 canvas
                                     .left_text(10.0, height_to_right, font, 6.0, &j)
@@ -113,7 +116,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 height_to_right -= 5.0;
                             }
                             height_to_right -= 10.0;
-                        } else {
+                        } else {// si il y a seulement une ligne de question
                             canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &questy[0])
                                 .expect("please work");
