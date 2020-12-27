@@ -15,7 +15,6 @@ fn blank_splace(mut base: usize, to_serch: &String) -> usize {
     base
 }
 
-
 ///fonction pour split sur un espace blanc au retour à la ligne
 /*pub fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
     let v: Vec<&str> = to_serch.split("").collect();
@@ -75,12 +74,13 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                             let mut cara_count = 0;
                             let mut nb_line = 0;
                             while cara_count <= clone_questy.len() {
-                                cara_count+=70;
-                                nb_line+=1;
+                                cara_count += 70;
+                                nb_line += 1;
                             }
 
                             for _i in 0..nb_line {
-                                let mut reste = clone_questy.split_off(blank_splace(70, &clone_questy));
+                                let mut reste =
+                                    clone_questy.split_off(blank_splace(70, &clone_questy));
                                 swap(&mut clone_questy, &mut reste);
                                 the_good_vec.push(reste);
                             }
@@ -92,23 +92,11 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                             }
                             the_good_vec.reverse();*/
 
-
                             /*canvas
                                 .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
                                 .expect("this is gonna work");
                             height_to_right -= 5.0;
                             */
-                            /*canvas
-                            .left_text(10.0, height_to_right, font, 6.0, &reste)
-                            .expect("maybe gonna work");
-                            */
-                            /*while let Some(muda) = the_good_vec.pop() {
-                                println!("{}", muda);
-                                canvas
-                                    .left_text(10.0, height_to_right, font, 6.0, &muda)
-                                    .expect("I need coffee");
-                                height_to_right -= 5.0;
-                            }*/
 
                             for i in the_good_vec {
                                 canvas
@@ -117,11 +105,6 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
                                 height_to_right -= 5.0;
                             }
                             height_to_right -= 10.0;
-
-                            /*canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
-                                .expect("maybe gonna work");
-                            height_to_right -= 15.0;*/
 
                             for j in answer_shuf {
                                 canvas
@@ -137,10 +120,6 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) {
 
                             height_to_right -= 10.0;
 
-                            /*canvas
-                                .left_text(10.0, height_to_right, font, 6.0, &answer_shuf)
-                                .expect("maybe gonna work");
-                            height_to_right -= 15.0;*/
                             for j in answer_shuf {
                                 canvas
                                     .left_text(10.0, height_to_right, font, 6.0, &j)

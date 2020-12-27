@@ -2,7 +2,6 @@ mod fonc;
 use anyhow::anyhow;
 use rand::prelude::*;
 
-
 fn main() -> anyhow::Result<()> {
     // Récupère le contenu du fichiers
     let buffer = std::fs::read_to_string("qcm_answer.txt")?;
