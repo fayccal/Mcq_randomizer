@@ -17,16 +17,6 @@ pub fn blank_space(mut base: usize, to_serch: &String) -> usize {
     base
 }
 
-///fonction pour split sur un espace blanc au retour à la ligne
-/*pub fn blank_splace_plus(mut base: usize, to_serch: &String) -> usize {
-    let v: Vec<&str> = to_serch.split("").collect();
-    while v[base] != " " {
-        base += 1;
-    }
-    base
-}
-*/
-
 ///randomize les réponse à une question
 pub fn randomize_answers(answers: &str) -> Vec<String> {
     let mut rng = rand::thread_rng();
@@ -67,7 +57,6 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
                     let answer_shuf = randomize_answers(questy[1]);
 
                     if questy[0].len() > 70 {
-                        // let mut vec_part_questy:Vec<String>=Vec::new();
                         let mut the_good_vec: Vec<String> = Vec::new();
                         let mut clone_questy = questy[0].to_string().clone();
                         let mut cara_count = 0;
@@ -82,19 +71,7 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
                             swap(&mut clone_questy, &mut reste);
                             the_good_vec.push(reste);
                         }
-                        /*while clone_questy.len() > 70 {
-                            the_good_vec.push(clone_questy.split_off(blank_splace_plus(
-                                clone_questy.len() - 70,
-                                &clone_questy,
-                            )));
-                        }
-                        the_good_vec.reverse();*/
 
-                        /*canvas
-                            .left_text(10.0, height_to_right, font, 6.0, &clone_questy)
-                            .expect("this is gonna work");
-                        height_to_right -= 5.0;
-                        */
                         // on écrit la question
                         for i in the_good_vec {
                             canvas.left_text(10.0, height_to_right, font, 6.0, &i)?;
