@@ -33,7 +33,29 @@ fn main() -> anyhow::Result<()> {
 
     // Génération des qcm
     for n in 1..=how_much {
-        fonc::create_qcm(n, &mut vec_vec[(n - 1) as usize]);
+        fonc::create_qcm(n, &mut vec_vec[(n - 1) as usize])?;
     }
     anyhow::Result::Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    ///test if we shuffuled (maybe false because it could give the same one even after the shuffle)
+    fn test_shuffle() {
+        let mut rng = rand::thread_rng();
+        let mut sample = vec!["une ligne", "une deuxieme", "et une troisième"];
+        sample.shuffle(&mut rng);
+
+        assert_ne!(sample, ["une ligne", "une deuxieme", "et une troisième"]);
+    }
+
+    #[test]
+    ///test if we returned the white space position in the question to be cut after
+    fn test_blank_space() {
+        let sample = "Hello i'am a sample, i'm here to be tested, happy to work with you now let's get started".to_string();
+        assert_eq!(67, fonc::blank_space(70, &sample));
+    }
 }
