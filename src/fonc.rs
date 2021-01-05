@@ -3,21 +3,23 @@ use rand::prelude::*;
 use std::io;
 use std::mem::swap;
 
-///fonction pour split sur un espace blanc au retour à la ligne (utilisation suspendu)
-pub fn blank_space(mut base: usize, to_serch: &String) -> usize {
-    //let mut base = 70;
-    if base > to_serch.len() {
-        base = to_serch.len();
+///Fonction pour split sur un espace blanc au retour à la ligne
+///Function to split on a white space
+pub fn blank_space(mut base: usize, to_search: &String) -> usize {
+    if base > to_search.len() {
+        base = to_search.len();
     }
-    // cherche un espace blanc pour ne pas couper de mot
-    let v: Vec<&str> = to_serch.split("").collect();
+    //Cherche un espace blanc pour ne pas couper de mot
+    //Search a blank space
+    let v: Vec<&str> = to_search.split("").collect();
     while v[base] != " " {
         base -= 1;
     }
     base
 }
 
-///randomize les réponse à une question
+///Randomize les réponses à une question
+///Randomize the answers of a question
 pub fn randomize_answers(answers: &str) -> Vec<String> {
     let mut rng = rand::thread_rng();
     let mut sanswers: Vec<&str> = answers.split("-").collect();
@@ -34,7 +36,8 @@ pub fn randomize_answers(answers: &str) -> Vec<String> {
     returned_string
 }
 
-///fonction de création du qcm
+///Fonction de création du qcm
+///Function creating the mcq
 pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
     let file_name = format!("../qcm_folder/qcm{}.pdf", num);
 
@@ -42,7 +45,8 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
 
     let font = BuiltinFont::Times_Roman;
 
-    // temps que on a encore du contenu on boucle
+    //Temps que on a encore du contenu on boucle
+    //While we have some content
     while !content.is_empty() {
         let mut height_to_right = 280.0;
         document.render_page(210.0, 297.0, |canvas| {
@@ -50,7 +54,8 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
             height_to_right -= 10.0;
             canvas.left_text(10.0, height_to_right, font, 6.0, "DATE:")?;
             height_to_right -= 20.0;
-            // si on va pas trop en bas de la page et que on a encore du contenu
+            //Si on va pas trop en bas de la page et que on a encore du contenu
+            //If we are to much below the page and we have some content
             while !content.is_empty() && height_to_right > 30.0 {
                 if let Some(hello) = content.pop() {
                     let questy: Vec<&str> = hello.split("answers:").collect();
@@ -65,27 +70,31 @@ pub fn create_qcm(num: i32, content: &mut Vec<String>) -> io::Result<()> {
                             cara_count += 70;
                             nb_line += 1;
                         }
-                        //combien de ligne on aura a écrire
+                        //Combien de ligne on aura a écrire
+                        //How much line do we have write
                         for _i in 0..nb_line {
                             let mut reste = clone_questy.split_off(blank_space(70, &clone_questy));
                             swap(&mut clone_questy, &mut reste);
                             the_good_vec.push(reste);
                         }
 
-                        // on écrit la question
+                        //On écrit la question
+                        //We write the question
                         for i in the_good_vec {
                             canvas.left_text(10.0, height_to_right, font, 6.0, &i)?;
                             height_to_right -= 5.0;
                         }
                         height_to_right -= 10.0;
-                        //on écrit les réponses
+                        //On écrit les réponses
+                        //We write the answers
                         for j in answer_shuf {
                             canvas.left_text(10.0, height_to_right, font, 6.0, &j)?;
                             height_to_right -= 5.0;
                         }
                         height_to_right -= 10.0;
                     } else {
-                        // si il y a seulement une ligne de question
+                        //Si il y a seulement une ligne de question
+                        //If there is only one line for the question
                         canvas.left_text(10.0, height_to_right, font, 6.0, &questy[0])?;
 
                         height_to_right -= 10.0;
